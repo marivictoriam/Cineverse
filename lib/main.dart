@@ -4,7 +4,9 @@ import 'package:cineverse/infraestructure/datasource/moviedb_actor_datasource.da
 import 'package:cineverse/infraestructure/datasource/moviedb_movie_datasource.dart';
 import 'package:cineverse/infraestructure/repositories/actors_repository_impl.dart';
 import 'package:cineverse/infraestructure/repositories/movies_repository_impl.dart';
-import 'package:cineverse/presentation/blocs/movie_actors_bloc.dart/movie_actors_bloc.dart';
+import 'package:cineverse/presentation/blocs/actors_detail_bloc/actors_detail_bloc.dart';
+import 'package:cineverse/presentation/blocs/actors_movies_bloc/actors_movies_bloc.dart';
+import 'package:cineverse/presentation/blocs/movie_actors_bloc/movie_actors_bloc.dart';
 import 'package:cineverse/presentation/blocs/movies_bloc/movies_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -28,10 +30,20 @@ class MyApp extends StatelessWidget {
               fetchMoreMovies:
                   MovieRepositoryImpl(MoviedbDatasource()).getPopular),
         ),
-        BlocProvider<ActorsBloc>(
-          create: (context) => ActorsBloc(
+        BlocProvider<MovieActorsBloc>(
+          create: (context) => MovieActorsBloc(
               getActors: ActorRepositoryImpl(ActorMovieDbDatasource())
                   .getActorsByMovie),
+        ),
+        BlocProvider<ActorsDetailBloc>(
+          create: (context) => ActorsDetailBloc(
+              getActor:
+                  ActorRepositoryImpl(ActorMovieDbDatasource()).getActorDetail),
+        ),
+        BlocProvider<ActorsMoviesBloc>(
+          create: (context) => ActorsMoviesBloc(
+              getActorsMovies:
+                  MovieRepositoryImpl(MoviedbDatasource()).getMoviesByActor),
         ),
       ],
       child: MaterialApp.router(

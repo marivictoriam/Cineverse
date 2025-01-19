@@ -31,7 +31,7 @@ class MoviedbDatasource extends MovieDatasource {
 
       return movies;
     } catch (e) {
-      return [null];
+      return [];
     }
   }
 
@@ -51,7 +51,7 @@ class MoviedbDatasource extends MovieDatasource {
 
       return movies;
     } catch (e) {
-      return [null];
+      return [];
     }
   }
 }

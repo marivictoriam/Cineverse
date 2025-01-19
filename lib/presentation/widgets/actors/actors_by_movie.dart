@@ -1,8 +1,9 @@
-import 'package:cineverse/presentation/blocs/movie_actors_bloc.dart/movie_actors_bloc.dart';
-import 'package:cineverse/presentation/blocs/movie_actors_bloc.dart/movie_actors_state.dart';
+import 'package:cineverse/presentation/blocs/movie_actors_bloc/movie_actors_bloc.dart';
+import 'package:cineverse/presentation/blocs/movie_actors_bloc/movie_actors_state.dart';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class ActorsByMovie extends StatelessWidget {
   final String movieId;
@@ -11,19 +12,53 @@ class ActorsByMovie extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ActorsBloc, ActorsState>(
+    return BlocBuilder<MovieActorsBloc, MovieActorsState>(
       builder: (context, state) {
-        final actors = state.actorsByMovie[movieId] ?? [];
-
         if (state.isLoading) {
           return const Center(
-              child: CircularProgressIndicator(
-            strokeWidth: 2,
+              child: SizedBox(
+            height: 50,
+            width: 50,
+            child: CircularProgressIndicator(
+              strokeWidth: 2,
+              color: Color.fromARGB(255, 26, 26, 26),
+            ),
           ));
         }
 
+        final actors = state.actorsByMovie[movieId] ?? [];
+
         if (actors.isEmpty) {
-          return const Center(child: Text("No se encontraron sus actores"));
+          return ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Stack(
+                children: [
+                  const FadeInImage(
+                    height: 200,
+                    width: 135,
+                    fit: BoxFit.cover,
+                    placeholder: AssetImage('assets/loader.jpg'),
+                    image: AssetImage('assets/loader.jpg'),
+                  ),
+                  Positioned(
+                    bottom: 10,
+                    left: 10,
+                    right: 10,
+                    child: Container(
+                      padding: const EdgeInsets.all(1),
+                      child: const Text(
+                        "Ocurrio un error",
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 49, 49, 49),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                      ),
+                    ),
+                  ),
+                ],
+              ));
         }
 
         return SizedBox(
@@ -42,9 +77,7 @@ class ActorsByMovie extends StatelessWidget {
                   children: [
                     FadeInRight(
                       child: GestureDetector(
-                        onTap: () {
-                          // actor.id
-                        },
+                        onTap: () => context.push('/actor/${actor.id}'),
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: Stack(

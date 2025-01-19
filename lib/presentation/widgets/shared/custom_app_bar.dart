@@ -5,22 +5,24 @@ class CustomAppbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
-    final colors = Theme.of(context).colorScheme;
-    final titleStyle = Theme.of(context).textTheme.titleLarge;
-    final subtitleStyle = Theme.of(context).textTheme.titleMedium;
-
-    return SafeArea(
+    return const SafeArea(
         bottom: false,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: EdgeInsets.symmetric(horizontal: 10),
           child: SizedBox(
             width: double.infinity,
             child: Column(
               children: [
-                const SizedBox(height: 20),
-                Text('Cineverse', style: titleStyle),
-                Text('Populares', style: subtitleStyle),
+                SizedBox(height: 20),
+                Text('Cineverse',
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    )),
+                Text('Populares',
+                    style: TextStyle(
+                      fontSize: 22,
+                    )),
               ],
             ),
           ),

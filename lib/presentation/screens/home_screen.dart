@@ -1,5 +1,6 @@
 import 'package:cineverse/presentation/blocs/movies_bloc/movies_state.dart';
 import 'package:cineverse/presentation/widgets/movies/movie_masonry.dart';
+import 'package:cineverse/presentation/widgets/shared/custom_error.dart';
 import 'package:cineverse/presentation/widgets/shared/screen_loader.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -30,20 +31,29 @@ class HomeScreenState extends State<HomeScreen>
 
     return Scaffold(
         appBar: const PreferredSize(
-          preferredSize: Size.fromHeight(100),
+          preferredSize: Size.fromHeight(120),
           child: CustomAppbar(),
         ),
         body: BlocBuilder<MoviesBloc, MoviesState>(
             builder: (context, moviesState) {
+          if (moviesState.isLoading) {
+            return const ScreenLoader();
+          }
+
           if (moviesState.movies.isEmpty) {
-            return const Center(child: ScreenLoader());
-          } else {
-            return MovieMasonry(
-              movies: moviesState.movies,
-              loadNextPage: () =>
-                  context.read<MoviesBloc>().add(LoadNextPage()),
+            return CustomError(
+              errorMessage: "Ocurrio un error cargando las peliculas",
+              onRetry: () {
+                context.read<MoviesBloc>().add(LoadNextPage());
+              },
             );
           }
+
+          return MovieMasonry(
+            movies: moviesState.movies,
+            loadNextPage: () => context.read<MoviesBloc>().add(LoadNextPage()),
+            infinityScroll: true,
+          );
         }));
   }
 

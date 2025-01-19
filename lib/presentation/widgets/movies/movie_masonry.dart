@@ -6,11 +6,13 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 class MovieMasonry extends StatefulWidget {
   final List<Movie> movies;
   final VoidCallback? loadNextPage;
+  final bool infinityScroll;
 
   const MovieMasonry({
     super.key,
     required this.movies,
     this.loadNextPage,
+    required this.infinityScroll,
   });
 
   @override
@@ -24,19 +26,24 @@ class _MovieMasonryState extends State<MovieMasonry> {
   void initState() {
     super.initState();
 
-    scrollController.addListener(() {
-      if (widget.loadNextPage == null) return;
+    if (widget.infinityScroll) {
+      //scrollController = ScrollController();
 
-      if ((scrollController.position.pixels + 100) >=
-          scrollController.position.maxScrollExtent) {
-        widget.loadNextPage!();
-      }
-    });
+      scrollController.addListener(() {
+        if (widget.loadNextPage == null) return;
+
+        if ((scrollController.position.pixels + 100) >=
+            scrollController.position.maxScrollExtent) {
+          widget.loadNextPage!();
+        }
+      });
+    }
   }
 
   @override
   void dispose() {
     scrollController.dispose();
+
     super.dispose();
   }
 

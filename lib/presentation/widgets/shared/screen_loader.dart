@@ -9,11 +9,23 @@ class ScreenLoader extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Espere por favor'),
-          SizedBox(height: 10),
-          CircularProgressIndicator(strokeWidth: 2),
-          SizedBox(height: 10),
-          Text('Cargando...')
+          Text(
+            'Espere por favor',
+            style: TextStyle(fontSize: 22),
+          ),
+          SizedBox(height: 15),
+          SizedBox(
+              height: 80,
+              width: 80,
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                color: Color.fromARGB(255, 97, 96, 96),
+              )),
+          SizedBox(height: 15),
+          Text(
+            'Cargando...',
+            style: TextStyle(fontSize: 22),
+          )
         ],
       ),
     );

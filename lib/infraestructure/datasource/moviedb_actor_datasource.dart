@@ -35,7 +35,7 @@ class ActorMovieDbDatasource extends ActorsDatasource {
 
       return actors;
     } catch (e) {
-      return [null];
+      return [];
     }
   }
 

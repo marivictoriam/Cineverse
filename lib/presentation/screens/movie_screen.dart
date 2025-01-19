@@ -1,7 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cineverse/domain/entities/movie.dart';
-import 'package:cineverse/presentation/blocs/movie_actors_bloc.dart/movie_actors_bloc.dart';
-import 'package:cineverse/presentation/blocs/movie_actors_bloc.dart/movie_actors_event.dart';
+import 'package:cineverse/presentation/blocs/movie_actors_bloc/movie_actors_bloc.dart';
+import 'package:cineverse/presentation/blocs/movie_actors_bloc/movie_actors_event.dart';
 import 'package:cineverse/presentation/widgets/actors/actors_by_movie.dart';
 import 'package:cineverse/presentation/widgets/shared/background.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +23,7 @@ class MovieScreenState extends State<MovieScreen> {
   void initState() {
     super.initState();
     final movie = widget.movie;
-    context.read<ActorsBloc>().add(LoadActors(movie.id.toString()));
+    context.read<MovieActorsBloc>().add(LoadMovieActors(movie.id.toString()));
   }
 
   @override

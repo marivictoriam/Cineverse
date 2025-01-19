@@ -1,20 +1,20 @@
 import 'package:cineverse/domain/entities/actor.dart';
 import 'package:equatable/equatable.dart';
 
-class ActorsState extends Equatable {
+class MovieActorsState extends Equatable {
   final Map<String, List<Actor>> actorsByMovie;
   final bool isLoading;
 
-  const ActorsState({
+  const MovieActorsState({
     this.actorsByMovie = const {},
     this.isLoading = false,
   });
 
-  ActorsState copyWith({
+  MovieActorsState copyWith({
     Map<String, List<Actor>>? actorsByMovie,
     bool? isLoading,
   }) {
-    return ActorsState(
+    return MovieActorsState(
       actorsByMovie: actorsByMovie ?? this.actorsByMovie,
       isLoading: isLoading ?? this.isLoading,
     );
