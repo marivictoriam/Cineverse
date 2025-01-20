@@ -38,10 +38,7 @@ class ActorDetail extends StatelessWidget {
                     children: [
                       Text(
                         actorName,
-                        style: const TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: Theme.of(context).textTheme.headlineLarge,
                       ),
                       const SizedBox(height: 5),
                       Text(

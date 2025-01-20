@@ -2,7 +2,7 @@ import 'package:cineverse/domain/entities/actor.dart';
 import 'package:cineverse/infraestructure/models/moviedb/movie_credits_response.dart';
 
 class CastMapper {
-  static Actor castToEntity(Cast cast) => Actor(
+  static Actor castToEntity(MovieCast cast) => Actor(
         id: cast.id,
         name: cast.name,
         profilePath: cast.profilePath != null

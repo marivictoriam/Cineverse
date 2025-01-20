@@ -1,11 +1,10 @@
-import 'package:cineverse/infraestructure/models/moviedb/actor_credits_response.dart';
-import 'package:dio/dio.dart';
-
-import 'package:cineverse/config/environment.dart';
 import 'package:cineverse/domain/entities/movie.dart';
-import 'package:cineverse/infraestructure/mappers/movie_mapper.dart';
-import 'package:cineverse/infraestructure/models/moviedb/moviedb_response.dart';
+import 'package:cineverse/infraestructure/mappers/mappers.dart';
+import 'package:cineverse/infraestructure/models/moviedb/models.dart';
 import 'package:cineverse/domain/datasources/movie_datasource.dart';
+import 'package:cineverse/config/environment.dart';
+
+import 'package:dio/dio.dart';
 
 class MoviedbDatasource extends MovieDatasource {
   final dio = Dio(BaseOptions(

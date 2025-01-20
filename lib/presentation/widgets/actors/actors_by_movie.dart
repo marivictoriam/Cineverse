@@ -1,5 +1,5 @@
-import 'package:cineverse/presentation/blocs/movie_actors_bloc/movie_actors_bloc.dart';
-import 'package:cineverse/presentation/blocs/movie_actors_bloc/movie_actors_state.dart';
+import 'package:cineverse/presentation/blocs/blocs.dart';
+
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -1,12 +1,10 @@
 import 'package:cineverse/domain/entities/actor.dart';
-import 'package:cineverse/infraestructure/mappers/actor_mapper.dart';
-import 'package:cineverse/infraestructure/mappers/cast_mapper.dart';
-import 'package:cineverse/infraestructure/models/moviedb/actor_details_response.dart';
-import 'package:cineverse/infraestructure/models/moviedb/movie_credits_response.dart';
-import 'package:dio/dio.dart';
-
-import 'package:cineverse/config/environment.dart';
+import 'package:cineverse/infraestructure/mappers/mappers.dart';
+import 'package:cineverse/infraestructure/models/moviedb/models.dart';
 import 'package:cineverse/domain/datasources/actor_datasource.dart';
+import 'package:cineverse/config/environment.dart';
+
+import 'package:dio/dio.dart';
 
 class ActorMovieDbDatasource extends ActorsDatasource {
   final dio = Dio(BaseOptions(
@@ -53,6 +51,26 @@ class ActorMovieDbDatasource extends ActorsDatasource {
       return actor;
     } catch (e) {
       return null;
+    }
+  }
+
+  @override
+  Future<List<Actor?>> getPopular({int page = 1}) async {
+    try {
+      final response =
+          await dio.get('/person/popular', queryParameters: {'page': page});
+
+      final actorsDBResponse = ActoDbResponse.fromJson(response.data);
+
+      // Uso del mapper para tener una lista de Actors
+      final List<Actor> actors = actorsDBResponse.results
+          .where((actordb) => actordb.name != '...')
+          .map((actordb) => ActorsMapper.responseToEntity(actordb))
+          .toList();
+
+      return actors;
+    } catch (e) {
+      return [];
     }
   }
 }

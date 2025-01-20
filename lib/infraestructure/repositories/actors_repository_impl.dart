@@ -15,4 +15,9 @@ class ActorRepositoryImpl extends ActorsRepository {
   Future<Actor?> getActorDetail(String actorID) {
     return datasource.getActorDetail(actorID);
   }
+
+  @override
+  Future<List<Actor?>> getPopular({int page = 1}) {
+    return datasource.getPopular(page: page);
+  }
 }

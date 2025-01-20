@@ -1,25 +1,27 @@
-import 'package:cineverse/domain/entities/movie.dart';
-import 'package:cineverse/presentation/widgets/movies/movie_poster.dart';
+import 'package:cineverse/presentation/widgets/shared/poster.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-class MovieMasonry extends StatefulWidget {
-  final List<Movie> movies;
+class Masonry extends StatefulWidget {
+  final List<dynamic> list;
   final VoidCallback? loadNextPage;
   final bool infinityScroll;
+  final bool isMovie;
 
-  const MovieMasonry({
+  const Masonry({
     super.key,
-    required this.movies,
+    required this.list,
     this.loadNextPage,
     required this.infinityScroll,
+    required this.isMovie,
   });
 
   @override
-  State<MovieMasonry> createState() => _MovieMasonryState();
+  State<Masonry> createState() => _MasonryState();
 }
 
-class _MovieMasonryState extends State<MovieMasonry> {
+class _MasonryState extends State<Masonry> {
   final scrollController = ScrollController();
 
   @override
@@ -56,18 +58,21 @@ class _MovieMasonryState extends State<MovieMasonry> {
         crossAxisCount: 2,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
-        itemCount: widget.movies.length,
+        itemCount: widget.list.length,
         itemBuilder: (context, index) {
           if (index == 1) {
             return Column(
               children: [
                 const SizedBox(height: 20),
-                MoviePoster(movie: widget.movies[index]),
+                Poster(
+                  info: widget.list[index],
+                  isMovie: widget.isMovie,
+                ),
               ],
             );
           }
 
-          return MoviePoster(movie: widget.movies[index]);
+          return Poster(info: widget.list[index], isMovie: widget.isMovie);
         },
       ),
     );

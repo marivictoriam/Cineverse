@@ -5,12 +5,13 @@ class MovieCreditsResponse {
   });
 
   final int id;
-  final List<Cast> cast;
+  final List<MovieCast> cast;
 
   factory MovieCreditsResponse.fromJson(Map<String, dynamic> json) =>
       MovieCreditsResponse(
         id: json["id"],
-        cast: List<Cast>.from(json["cast"].map((x) => Cast.fromJson(x))),
+        cast: List<MovieCast>.from(
+            json["cast"].map((x) => MovieCast.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -19,8 +20,8 @@ class MovieCreditsResponse {
       };
 }
 
-class Cast {
-  Cast({
+class MovieCast {
+  MovieCast({
     required this.adult,
     required this.gender,
     required this.id,
@@ -52,7 +53,7 @@ class Cast {
   final String? department;
   final String? job;
 
-  factory Cast.fromJson(Map<String, dynamic> json) => Cast(
+  factory MovieCast.fromJson(Map<String, dynamic> json) => MovieCast(
         adult: json["adult"] ?? false,
         gender: json["gender"] ?? 0,
         id: json["id"],

@@ -8,20 +8,20 @@ import 'package:cineverse/presentation/widgets/shared/custom_app_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class ActorsScreen extends StatefulWidget {
+  const ActorsScreen({super.key});
 
   @override
-  HomeScreenState createState() => HomeScreenState();
+  ActorsScreenState createState() => ActorsScreenState();
 }
 
-class HomeScreenState extends State<HomeScreen>
+class ActorsScreenState extends State<ActorsScreen>
     with AutomaticKeepAliveClientMixin {
   @override
   void initState() {
     super.initState();
 
-    context.read<MoviesBloc>().add(LoadNextPage());
+    context.read<ActorsBloc>().add(LoadANextPage());
   }
 
   @override
@@ -31,28 +31,30 @@ class HomeScreenState extends State<HomeScreen>
     return Scaffold(
         appBar: const PreferredSize(
           preferredSize: Size.fromHeight(100),
-          child: CustomAppbar(subtitle: "Peliculas Populares"),
+          child: CustomAppbar(
+            subtitle: "Actores Populares",
+          ),
         ),
         drawer: const CustomDrawer(),
-        body: BlocBuilder<MoviesBloc, MoviesState>(builder: (context, state) {
-          if (state.isLoading && state.movies.isEmpty) {
+        body: BlocBuilder<ActorsBloc, ActorsState>(builder: (context, state) {
+          if (state.isLoading && state.actors.isEmpty) {
             return const ScreenLoader();
           }
 
-          if (state.movies.isEmpty) {
+          if (state.actors.isEmpty) {
             return CustomError(
               errorMessage: "Ocurrio un error cargando las peliculas",
               onRetry: () {
-                context.read<MoviesBloc>().add(LoadNextPage());
+                context.read<ActorsBloc>().add(LoadANextPage());
               },
             );
           }
 
           return Masonry(
-            list: state.movies,
-            loadNextPage: () => context.read<MoviesBloc>().add(LoadNextPage()),
+            list: state.actors,
+            loadNextPage: () => context.read<ActorsBloc>().add(LoadANextPage()),
             infinityScroll: true,
-            isMovie: true,
+            isMovie: false,
           );
         }));
   }

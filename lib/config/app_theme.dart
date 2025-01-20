@@ -13,8 +13,12 @@ class AppTheme {
 
   ThemeData theme() {
     return ThemeData(
-      useMaterial3: true,
-      colorSchemeSeed: _colors[selectedColor],
-    );
+        useMaterial3: true,
+        colorSchemeSeed: _colors[selectedColor],
+        textTheme: const TextTheme(
+            headlineLarge: TextStyle(
+          fontSize: 30,
+          fontWeight: FontWeight.bold,
+        )));
   }
 }

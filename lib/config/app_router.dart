@@ -1,7 +1,7 @@
 import 'package:cineverse/domain/entities/movie.dart';
-import 'package:cineverse/presentation/screens/actor_screen.dart';
-import 'package:go_router/go_router.dart';
 import 'package:cineverse/presentation/screens/screens.dart';
+
+import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(initialLocation: '/home', routes: [
   GoRoute(
@@ -25,6 +25,13 @@ final appRouter = GoRouter(initialLocation: '/home', routes: [
     builder: (context, state) {
       final actorId = state.pathParameters['id'] ?? 'no-id';
       return ActorScreen(actorId: actorId);
+    },
+  ),
+  GoRoute(
+    path: '/actors',
+    name: "actors-screen",
+    builder: (context, state) {
+      return const ActorsScreen();
     },
   ),
   GoRoute(

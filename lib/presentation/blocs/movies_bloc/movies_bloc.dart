@@ -1,6 +1,6 @@
 import 'package:cineverse/domain/entities/movie.dart';
-import 'package:cineverse/presentation/blocs/movies_bloc/movies_event.dart';
-import 'package:cineverse/presentation/blocs/movies_bloc/movies_state.dart';
+import 'package:cineverse/presentation/blocs/movies_bloc/movies.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {

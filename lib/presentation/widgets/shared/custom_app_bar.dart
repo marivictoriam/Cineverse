@@ -1,26 +1,41 @@
 import 'package:flutter/material.dart';
 
 class CustomAppbar extends StatelessWidget {
-  const CustomAppbar({super.key});
+  final String subtitle;
+
+  const CustomAppbar({super.key, required this.subtitle});
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
+    return SafeArea(
         bottom: false,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
           child: SizedBox(
             width: double.infinity,
             child: Column(
               children: [
-                SizedBox(height: 20),
-                Text('Cineverse',
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
+                Stack(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: Color.fromARGB(255, 136, 173, 253),
+                      child: IconButton(
+                        icon: const Icon(Icons.menu),
+                        color: Colors.white,
+                        onPressed: () {
+                          Scaffold.of(context).openDrawer();
+                        },
+                      ),
+                    ),
+                    Center(
+                        child: Text(
+                      'Cineverse',
+                      style: Theme.of(context).textTheme.headlineLarge,
                     )),
-                Text('Populares',
-                    style: TextStyle(
+                  ],
+                ),
+                Text(subtitle,
+                    style: const TextStyle(
                       fontSize: 22,
                     )),
               ],

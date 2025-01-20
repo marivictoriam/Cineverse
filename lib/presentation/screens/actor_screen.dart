@@ -1,16 +1,12 @@
-import 'package:animate_do/animate_do.dart';
-import 'package:cineverse/presentation/blocs/actors_detail_bloc/actors_detail_bloc.dart';
-import 'package:cineverse/presentation/blocs/actors_detail_bloc/actors_detail_event.dart';
-import 'package:cineverse/presentation/blocs/actors_detail_bloc/actors_detail_state.dart';
-import 'package:cineverse/presentation/blocs/actors_movies_bloc/actors_movies_bloc.dart';
-import 'package:cineverse/presentation/blocs/actors_movies_bloc/actors_movies_event.dart';
-import 'package:cineverse/presentation/blocs/actors_movies_bloc/actors_movies_state.dart';
 import 'package:cineverse/presentation/widgets/actors/actor_detail.dart';
-import 'package:cineverse/presentation/widgets/movies/movie_masonry.dart';
+import 'package:cineverse/presentation/blocs/blocs.dart';
+import 'package:cineverse/presentation/widgets/shared/masonry.dart';
 import 'package:cineverse/presentation/widgets/shared/custom_error.dart';
 import 'package:cineverse/presentation/widgets/shared/screen_loader.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:animate_do/animate_do.dart';
 
 class ActorScreen extends StatefulWidget {
   final String actorId;
@@ -70,12 +66,9 @@ class ActorScreenState extends State<ActorScreen>
                         actorBio: actor.biography!,
                       ),
                       FadeInUp(
-                        child: const Text(
+                        child: Text(
                           "Filmografia",
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: Theme.of(context).textTheme.headlineLarge,
                         ),
                       ),
                       const SizedBox(
@@ -122,9 +115,10 @@ class ActorScreenState extends State<ActorScreen>
                                         )
                                       ]));
                             }
-                            return MovieMasonry(
-                              movies: movies,
+                            return Masonry(
+                              list: movies,
                               infinityScroll: false,
+                              isMovie: true,
                             );
                           },
                         ),
@@ -137,10 +131,10 @@ class ActorScreenState extends State<ActorScreen>
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: CircleAvatar(
-                backgroundColor: Colors.white,
+                backgroundColor: Color.fromARGB(255, 136, 173, 253),
                 child: IconButton(
                   icon: const Icon(Icons.arrow_back),
-                  color: Colors.black,
+                  color: Colors.white,
                   onPressed: () {
                     Navigator.of(context).pop();
                   },

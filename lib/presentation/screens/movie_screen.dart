@@ -1,11 +1,11 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:cineverse/domain/entities/movie.dart';
-import 'package:cineverse/presentation/blocs/movie_actors_bloc/movie_actors_bloc.dart';
-import 'package:cineverse/presentation/blocs/movie_actors_bloc/movie_actors_event.dart';
+import 'package:cineverse/presentation/blocs/blocs.dart';
 import 'package:cineverse/presentation/widgets/actors/actors_by_movie.dart';
 import 'package:cineverse/presentation/widgets/shared/background.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:animate_do/animate_do.dart';
 
 class MovieScreen extends StatefulWidget {
   final Movie movie;
@@ -58,10 +58,10 @@ class MovieScreenState extends State<MovieScreen> {
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: CircleAvatar(
-              backgroundColor: Colors.white,
+              backgroundColor: Color.fromARGB(255, 136, 173, 253),
               child: IconButton(
                 icon: const Icon(Icons.arrow_back),
-                color: Colors.black,
+                color: Colors.white,
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -125,10 +125,10 @@ class MovieScreenState extends State<MovieScreen> {
           child: Padding(
             padding: const EdgeInsets.all(10),
             child: CircleAvatar(
-              backgroundColor: Colors.white,
+              backgroundColor: Color.fromARGB(255, 136, 173, 253),
               child: IconButton(
                 icon: const Icon(Icons.arrow_back),
-                color: Colors.black,
+                color: Colors.white,
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
