@@ -39,12 +39,14 @@ class ActorScreenState extends State<ActorScreen>
       final actor = actorState.actorsDetails[widget.actorId];
 
       if (actorState.isLoading) {
-        return const ScreenLoader();
+        return const ScreenLoader(
+          isMain: false,
+        );
       }
 
       if (actor == null) {
         return CustomError(
-          errorMessage: "Ocurrio un error cargando las peliculas",
+          errorMessage: "Ocurrio un error cargando la informacion del actor",
           onRetry: () {
             context.read<ActorsDetailBloc>().add(LoadActor(widget.actorId));
           },

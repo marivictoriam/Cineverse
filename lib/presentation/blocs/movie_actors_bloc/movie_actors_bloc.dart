@@ -15,21 +15,35 @@ class MovieActorsBloc extends Bloc<MovieActorsEvent, MovieActorsState> {
     if (state.actorsByMovie[event.movieId] == null) {
       emit(state.copyWith(isLoading: true));
 
-      final List<Actor> actors = await getActors(event.movieId);
+      try {
+        final List<Actor> actors = await getActors(event.movieId);
 
-      emit(state.copyWith(
-        actorsByMovie: {...state.actorsByMovie, event.movieId: actors},
-        isLoading: false,
-      ));
+        emit(state.copyWith(
+          actorsByMovie: {...state.actorsByMovie, event.movieId: actors},
+          isLoading: false,
+        ));
+      } catch (e) {
+        emit(state.copyWith(
+          actorsByMovie: state.actorsByMovie,
+          isLoading: false,
+        ));
+      }
     } else if (state.actorsByMovie[event.movieId]!.isEmpty) {
       emit(state.copyWith(isLoading: true));
 
-      final List<Actor> actors = await getActors(event.movieId);
+      try {
+        final List<Actor> actors = await getActors(event.movieId);
 
-      emit(state.copyWith(
-        actorsByMovie: {...state.actorsByMovie, event.movieId: actors},
-        isLoading: false,
-      ));
+        emit(state.copyWith(
+          actorsByMovie: {...state.actorsByMovie, event.movieId: actors},
+          isLoading: false,
+        ));
+      } catch (e) {
+        emit(state.copyWith(
+          actorsByMovie: state.actorsByMovie,
+          isLoading: false,
+        ));
+      }
     } else {
       return;
     }

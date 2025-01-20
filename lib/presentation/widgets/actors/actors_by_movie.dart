@@ -29,36 +29,41 @@ class ActorsByMovie extends StatelessWidget {
         final actors = state.actorsByMovie[movieId] ?? [];
 
         if (actors.isEmpty) {
-          return ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Stack(
-                children: [
-                  const FadeInImage(
-                    height: 200,
-                    width: 135,
-                    fit: BoxFit.cover,
-                    placeholder: AssetImage('assets/loader.jpg'),
-                    image: AssetImage('assets/loader.jpg'),
-                  ),
-                  Positioned(
-                    bottom: 10,
-                    left: 10,
-                    right: 10,
-                    child: Container(
-                      padding: const EdgeInsets.all(1),
-                      child: const Text(
-                        "Ocurrio un error",
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 49, 49, 49),
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
+          return Row(
+            children: [
+              ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Stack(
+                    children: [
+                      const FadeInImage(
+                        height: 200,
+                        width: 135,
+                        fit: BoxFit.fill,
+                        placeholder: AssetImage('assets/loader.jpg'),
+                        image: AssetImage('assets/loader.jpg'),
                       ),
-                    ),
-                  ),
-                ],
-              ));
+                      Positioned(
+                        bottom: 10,
+                        left: 10,
+                        right: 10,
+                        child: Container(
+                          padding: const EdgeInsets.all(1),
+                          child: const Text(
+                            "Ocurrio un error",
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 49, 49, 49),
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )),
+              const Spacer()
+            ],
+          );
         }
 
         return SizedBox(
@@ -82,15 +87,19 @@ class ActorsByMovie extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20),
                             child: Stack(
                               children: [
-                                FadeInImage(
+                                FadeInImage.assetNetwork(
                                   height: 200,
                                   width: 135,
                                   fit: BoxFit.cover,
-                                  placeholder:
-                                      const AssetImage('assets/loader.jpg'),
-                                  image: NetworkImage(
-                                    actor.profilePath,
-                                  ),
+                                  image: actor.profilePath,
+                                  placeholder: 'assets/loader.jpg',
+                                  imageErrorBuilder:
+                                      (context, error, stackTrace) {
+                                    return SizedBox(
+                                        height: double.infinity,
+                                        child: Image.asset('assets/loader.jpg',
+                                            fit: BoxFit.fill));
+                                  },
                                 ),
                                 Positioned(
                                   bottom: 10,

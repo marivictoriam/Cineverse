@@ -19,17 +19,22 @@ class ActorDetail extends StatelessWidget {
             padding: const EdgeInsets.all(20),
             child: Row(
               children: [
-                Stack(
-                  children: [
-                    const CircleAvatar(
-                      radius: 50,
-                      backgroundImage: AssetImage('assets/loader.jpg'),
+                CircleAvatar(
+                  radius: 50,
+                  backgroundColor: Colors.grey[200],
+                  child: ClipOval(
+                    child: FadeInImage.assetNetwork(
+                      placeholder: 'assets/loader.jpg',
+                      image: actorImage,
+                      fit: BoxFit.cover,
+                      imageErrorBuilder: (context, error, stackTrace) {
+                        return Image.asset(
+                          'assets/loader.jpg',
+                          fit: BoxFit.fill,
+                        );
+                      },
                     ),
-                    CircleAvatar(
-                      radius: 50,
-                      backgroundImage: NetworkImage(actorImage),
-                    ),
-                  ],
+                  ),
                 ),
                 const SizedBox(width: 16),
                 Expanded(

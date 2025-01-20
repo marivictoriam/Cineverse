@@ -17,13 +17,21 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
 
     emit(state.copyWith(isLoading: true));
 
-    final nextPage = state.currentPage + 1;
-    final List<Movie> newMovies = await fetchMoreMovies(page: nextPage);
+    try {
+      final nextPage = state.currentPage + 1;
+      final List<Movie> newMovies = await fetchMoreMovies(page: nextPage);
 
-    emit(state.copyWith(
-      movies: [...state.movies, ...newMovies],
-      currentPage: nextPage,
-      isLoading: false,
-    ));
+      emit(state.copyWith(
+        movies: [...state.movies, ...newMovies],
+        currentPage: nextPage,
+        isLoading: false,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        movies: state.movies,
+        currentPage: state.currentPage,
+        isLoading: false,
+      ));
+    }
   }
 }

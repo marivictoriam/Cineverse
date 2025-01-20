@@ -36,7 +36,9 @@ class HomeScreenState extends State<HomeScreen>
         drawer: const CustomDrawer(),
         body: BlocBuilder<MoviesBloc, MoviesState>(builder: (context, state) {
           if (state.isLoading && state.movies.isEmpty) {
-            return const ScreenLoader();
+            return const ScreenLoader(
+              isMain: true,
+            );
           }
 
           if (state.movies.isEmpty) {

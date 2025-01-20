@@ -38,7 +38,9 @@ class ActorsScreenState extends State<ActorsScreen>
         drawer: const CustomDrawer(),
         body: BlocBuilder<ActorsBloc, ActorsState>(builder: (context, state) {
           if (state.isLoading && state.actors.isEmpty) {
-            return const ScreenLoader();
+            return const ScreenLoader(
+              isMain: true,
+            );
           }
 
           if (state.actors.isEmpty) {

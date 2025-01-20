@@ -27,14 +27,18 @@ class Poster extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           child: Stack(
             children: [
-              FadeInImage(
+              FadeInImage.assetNetwork(
                 height: 250,
                 width: double.infinity,
                 fit: BoxFit.cover,
-                placeholder: const AssetImage('assets/loader.jpg'),
-                image: isMovie
-                    ? NetworkImage(info.posterPath)
-                    : NetworkImage(info.profilePath),
+                image: isMovie ? info.posterPath : info.profilePath,
+                placeholder: 'assets/loader.jpg',
+                imageErrorBuilder: (context, error, stackTrace) {
+                  return SizedBox(
+                      height: double.infinity,
+                      child:
+                          Image.asset('assets/loader.jpg', fit: BoxFit.fill));
+                },
               ),
               Background(
                 option: 1,

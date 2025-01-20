@@ -17,13 +17,21 @@ class ActorsBloc extends Bloc<ActorsEvent, ActorsState> {
 
     emit(state.copyWith(isLoading: true));
 
-    final nextPage = state.currentPage + 1;
-    final List<Actor> newActors = await fetchMoreActors(page: nextPage);
+    try {
+      final nextPage = state.currentPage + 1;
+      final List<Actor> newActors = await fetchMoreActors(page: nextPage);
 
-    emit(state.copyWith(
-      actors: [...state.actors, ...newActors],
-      currentPage: nextPage,
-      isLoading: false,
-    ));
+      emit(state.copyWith(
+        actors: [...state.actors, ...newActors],
+        currentPage: nextPage,
+        isLoading: false,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        actors: state.actors,
+        currentPage: state.currentPage,
+        isLoading: false,
+      ));
+    }
   }
 }

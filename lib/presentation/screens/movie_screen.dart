@@ -46,12 +46,17 @@ class MovieScreenState extends State<MovieScreen> {
     return Stack(
       children: [
         Center(
-          child: FadeInImage(
+          child: FadeInImage.assetNetwork(
             height: double.infinity,
             width: double.infinity,
             fit: BoxFit.cover,
-            placeholder: const AssetImage('assets/loader.jpg'),
-            image: NetworkImage(widget.movie.posterPath),
+            image: widget.movie.posterPath,
+            placeholder: 'assets/loader.jpg',
+            imageErrorBuilder: (context, error, stackTrace) {
+              return SizedBox(
+                  height: double.infinity,
+                  child: Image.asset('assets/loader.jpg', fit: BoxFit.fill));
+            },
           ),
         ),
         SafeArea(
@@ -76,12 +81,17 @@ class MovieScreenState extends State<MovieScreen> {
   Widget buildDetailsView() {
     return Stack(
       children: [
-        FadeInImage(
+        FadeInImage.assetNetwork(
           height: double.infinity,
           width: double.infinity,
           fit: BoxFit.cover,
-          placeholder: const AssetImage('assets/loader.jpg'),
-          image: NetworkImage(widget.movie.posterPath),
+          image: widget.movie.posterPath,
+          placeholder: 'assets/loader.jpg',
+          imageErrorBuilder: (context, error, stackTrace) {
+            return SizedBox(
+                height: double.infinity,
+                child: Image.asset('assets/loader.jpg', fit: BoxFit.fill));
+          },
         ),
         FadeIn(
             duration: const Duration(milliseconds: 700),
