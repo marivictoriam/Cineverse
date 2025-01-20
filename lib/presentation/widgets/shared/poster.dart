@@ -35,7 +35,7 @@ class Poster extends StatelessWidget {
                 placeholder: 'assets/loader.jpg',
                 imageErrorBuilder: (context, error, stackTrace) {
                   return SizedBox(
-                      height: double.infinity,
+                      height: 250,
                       child:
                           Image.asset('assets/loader.jpg', fit: BoxFit.fill));
                 },
